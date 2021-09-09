@@ -1,9 +1,9 @@
 Por cuestiones de Contenidos mixtos (mezcla de peticiones), github no permite el uso peticiones HTTP, esto deriva de la URL http://challenge-react.alkemy.org/ que se tiene que utilizar para simular el login. Por normas, las páginas alojadas en github, estan forzadas a utilizar Peticiones HTTPS para mantener la seguridad del cliente, lo que desemboca en la imposibilidad de poder utilizar la URL. Por ello, la única solución que veo a mi alcance es ofrecer una guías de pasos para que puedas ver el proyecto desde tu máquina.
 
-1- descargar el repositorio
-2- Instalar Node.js (si es que no lo tienes)
-3- abrir la terminal dentro de el repositorio descargado y colocar lo siguiente NPM INSTALL
-4- cuando haya finalizado la instalación, escribir NPM START para iniciar el servidor local. Para cerrarlo, solo tienes que apretar CTRL + C.
+1- descargar el repositorio<br/>
+2- Instalar Node.js (si es que no lo tienes)<br/>
+3- abrir la terminal dentro de el repositorio descargado y colocar lo siguiente NPM INSTALL<br/>
+4- cuando haya finalizado la instalación, escribir NPM START para iniciar el servidor local. Para cerrarlo, solo tienes que apretar CTRL + C.<br/>
 
 Siguiendo esos pasos es posible interactuar con el proyecto. Muchas Gracias.
 

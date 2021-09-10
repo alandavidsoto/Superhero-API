@@ -5,10 +5,9 @@ import { auth } from '../../App'
 export const PrivateRoute = ({path,component}) => {
     const Componente = component 
     const authenticaded = useContext(auth)
-    console.log(authenticaded)
     return (
         <Route exact path={path}>
-            {(authenticaded)? <Componente />: <Redirect to="/"/>}
+            {(authenticaded.isAuthenticaded)? <Componente />: <Redirect to="/"/>}
         </Route>
     )
 }

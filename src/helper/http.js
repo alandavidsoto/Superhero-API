@@ -9,8 +9,7 @@ export default function http(url,method,body = null){
         url,
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
+            'Content-Type': 'application/json'
         },
     }
     method = method.toLowerCase()

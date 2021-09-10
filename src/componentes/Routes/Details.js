@@ -23,12 +23,11 @@ export const Details = () => {
 
 const Info = ({character}) => {
     const volver = () => {
-        console.log("xd")
         window.close()
     }
     return (
         <section className="contenedor-details">
-            <div className="details mt-5">
+            <div className="details">
                 <div className="contenedor-imagen">
                     <img src={character.image.url} />
                 </div>

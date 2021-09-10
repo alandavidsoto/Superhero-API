@@ -1,9 +1,10 @@
-import React, {useState ,Fragment,useEffect } from 'react'
- import { useHistory } from 'react-router-dom'
+import React, {useState ,Fragment,useEffect,useContext } from 'react'
+ import { useHistory,Redirect } from 'react-router-dom'
 import { Buscador } from '../forms/Buscador'
 import { PowerStats } from '../PowerStats'
 import { Card } from '../Card'
 import { CardTeam } from '../CardTeam'
+import { auth } from '../../App'
 
 
 export const Home = () => {
@@ -12,6 +13,7 @@ export const Home = () => {
     const [character,setCharacter] = useState({bad: 0,good: 0})
     const [uniqueId,setUniqueID ] = useState([])
     const history = useHistory();
+    const authenticaded = useContext(auth)
 
     const handlerClick = (id)=>{
         dataHeroes.map(elemento=> {
@@ -52,8 +54,8 @@ export const Home = () => {
     }
     const logout = () => {
         localStorage.removeItem("auth")
-        window.location.pathname = "/"
-        console.log(window.location)
+        authenticaded.setIsAuthenticaded(null)
+        history.push("/")
     }
     document.body.style.background = "linear-gradient(45deg,#000,#111)"
     return (

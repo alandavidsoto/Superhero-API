@@ -32,6 +32,7 @@
       .card {
           background-color: $blanco;
           width: 40%;
+          max-width: 700px;
       }
   }
   .home {
@@ -145,12 +146,10 @@
     height: 100vh;
     background-size: 70%;
     background-blend-mode: multiply;
-    display: flex;
-    justify-content: center;
     .details {
       padding: 5px;
       width: 700px;
-      height: 400px;
+      margin: 0px auto;
       background-color: #111;
       color: $blanco;
       display: grid;
@@ -205,7 +204,11 @@
     
   }
 }
-
+@media (min-width: 1600px) and (max-width: 2000px){
+  #root {
+    font-size: 21px;
+  }
+}
 
 
 

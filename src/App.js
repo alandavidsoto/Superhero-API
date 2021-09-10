@@ -12,14 +12,14 @@ function App() {
   const [isAuthenticaded,setIsAuthenticaded] = useState(localStorage.getItem('auth'))
 
   return (
-    <auth.Provider value={isAuthenticaded}>
+    <auth.Provider value={{isAuthenticaded,setIsAuthenticaded}}>
       <Router>
           <Switch>
             <PrivateRoute path='/details' component={Details}/>
             <PrivateRoute path='/home' component={Home}/>
             
             <Route exact path='/'>
-              {(isAuthenticaded)? <Redirect to="/home" /> : <Login setIsAuthenticaded={setIsAuthenticaded}/>}
+              {(isAuthenticaded)? <Redirect to="/home" /> : <Login/>}
             </Route>
               
           </Switch>

@@ -3,11 +3,12 @@ import { useLocation,useHistory,Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Formik,Form,Field, ErrorMessage } from 'formik'
 import http from '../../helper/http'
+import { auth } from '../../App'
 
 export const Login = ({setIsAuthenticaded}) => {
     const [invalid,setInvalid] = useState(false)
     const history = useHistory();
-
+    const authenticaded = useContext(auth)
     return (
         <Fragment>
             <section className="login">
@@ -33,7 +34,7 @@ export const Login = ({setIsAuthenticaded}) => {
                             .then(res => {
                                 setInvalid(false);
                                 if(res.status == 200){
-                                    setIsAuthenticaded(true)
+                                    authenticaded.setIsAuthenticaded(true)
                                     history.push('/home')
                                     localStorage.setItem('auth','true')
                                 }

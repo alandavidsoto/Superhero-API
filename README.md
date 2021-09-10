@@ -2,7 +2,7 @@ Por cuestiones de Contenidos mixtos (mezcla de peticiones), github no permite el
 
 1- descargar el repositorio<br/>
 2- Instalar Node.js (si es que no lo tienes)<br/>
-3- abrir la terminal dentro de el repositorio descargado y colocar lo siguiente NPM INSTALL<br/>
+3- abrir la terminal dentro del repositorio descargado y colocar el siguiente comando NPM INSTALL<br/>
 4- cuando haya finalizado la instalación, escribir NPM START para iniciar el servidor local. Para cerrarlo, solo tienes que apretar CTRL + C.<br/>
 
 Siguiendo esos pasos es posible interactuar con el proyecto. Muchas Gracias.

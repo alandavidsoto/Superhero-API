@@ -1,14 +1,20 @@
-import React,{useState,useContext, Fragment} from 'react'
-import { useLocation,useHistory,Redirect } from 'react-router-dom'
+import React,{useState,useContext, Fragment, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Formik,Form,Field, ErrorMessage } from 'formik'
-import http from '../../helper/http'
-import { auth } from '../../App'
+import { axios_auth_action } from '../../redux/action'
+import { useSelector,useDispatch } from 'react-redux'
 
-export const Login = ({setIsAuthenticaded}) => {
-    const [invalid,setInvalid] = useState(false)
-    const history = useHistory();
-    const authenticaded = useContext(auth)
+
+export const Login = () => {
+    const isAuthenticaded = useSelector((state)=> state.auth_reducer.isAuthenticaded)
+    
+    const [invalid,setInvalid] = useState(null)
+    const dispatch = useDispatch()
+
+    useEffect(()=> {
+        (isAuthenticaded == false) && setInvalid("Datos incorrectos");
+    },[isAuthenticaded])
+    
     return (
         <Fragment>
             <section className="login">
@@ -29,19 +35,8 @@ export const Login = ({setIsAuthenticaded}) => {
                             return errors;
                         }}
                         onSubmit={(values) => {
-                            let url = 'http://challenge-react.alkemy.org/';
-                            http(url,'post',values)
-                            .then(res => {
-                                setInvalid(false);
-                                if(res.status == 200){
-                                    authenticaded.setIsAuthenticaded(true)
-                                    history.push('/home')
-                                    localStorage.setItem('auth','true')
-                                }
-                                
-                            })
-                            .catch(() => setInvalid("Datos incorrectos"))
-                          }}
+                            dispatch(axios_auth_action('http://challenge-react.alkemy.org/',values))
+                        }}
                     >
                         {({ errors })=> (
     

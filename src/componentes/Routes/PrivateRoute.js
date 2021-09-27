@@ -1,13 +1,13 @@
-import React,{useContext,useEffect} from 'react'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { Route,Redirect } from 'react-router-dom'
-import { auth } from '../../App'
 
 export const PrivateRoute = ({path,component}) => {
     const Componente = component 
-    const authenticaded = useContext(auth)
+    const isAuthenticaded = useSelector((state)=> state.auth_reducer.isAuthenticaded)
     return (
         <Route exact path={path}>
-            {(authenticaded.isAuthenticaded)? <Componente />: <Redirect to="/"/>}
+            {(isAuthenticaded)? <Componente />: <Redirect to="/"/>}
         </Route>
     )
 }

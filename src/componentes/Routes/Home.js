@@ -1,96 +1,91 @@
 import React, {useState ,Fragment,useEffect,useContext } from 'react'
- import { useHistory,Redirect } from 'react-router-dom'
 import { Buscador } from '../forms/Buscador'
-import { PowerStats } from '../PowerStats'
-import { Card } from '../Card'
-import { CardTeam } from '../CardTeam'
-import { auth } from '../../App'
-
+import { Team } from '../Team'
+import { ResultadoPeticion } from '../ResultadoPeticion'
+import { Header } from '../Header'
+import { useSelector } from 'react-redux'
+import { FasesPeticion } from '../FasesPeticion'
 
 export const Home = () => {
-    const [dataHeroes,setDataHeroes] = useState(null)
     const [team,setTeam] = useState([])
-    const [character,setCharacter] = useState({bad: 0,good: 0})
-    const [uniqueId,setUniqueID ] = useState([])
-    const history = useHistory();
-    const authenticaded = useContext(auth)
+    const [character,setCharacter] = useState({bad: 0,good: 0,uniqueId: []})
+    const [modal,setModal] = useState(null)
+    const dataHeroes = useSelector((state)=> state.dataHeroes_reducer.data)
+    
+    // realiza la adicion de un miembro
 
-    const handlerClick = (id)=>{
-        dataHeroes.map(elemento=> {
-            if (elemento.id == id){
-                if(elemento.biography.alignment == "good"){
-                    if(character.good < 3 && !uniqueId.includes(elemento.id)){
-                        setCharacter({...character,good: character.good + 1 })
-                        setTeam([...team,elemento])
-                        setUniqueID([...uniqueId,elemento.id])
-                    }
-                } else {
-                    if(character.bad < 3 && !uniqueId.includes(elemento.id)){
-                        setCharacter({...character,bad: character.bad + 1})
-                        setTeam([...team,elemento])
-                        setUniqueID([...uniqueId,elemento.id])
-                    }
-                }
-            }
-        })
+    const addMiembro = (elemento)=>{
+        if(elemento.biography.alignment == "good"){
+            verificador_addMiembro(elemento,character.good,{good: character.good + 1})
+        } else {
+            verificador_addMiembro(elemento,character.bad,{bad: character.bad + 1})
+        }
+        
+    }
+    // Verifica que el miembro no exceda el N° su Bando y que no se repita
+
+    const verificador_addMiembro = (elemento,tipoHeroe,objeto) =>{
+        if(tipoHeroe < 3 ){
+            if(!character.uniqueId.includes(elemento.id)){
+                setCharacter({...character,...objeto,uniqueId: [...character.uniqueId,elemento.id] })
+                setTeam([...team,elemento])
+                addModal("Buenisimo, se ha agregado al team","success")
+    
+            } else addModal("No puedes agregar un mismo personaje","danger")
+        } else addModal("No puedes agregar mas heroes del mismo Bando","danger")
+        
     }
 
-    const handlerFetch = (data)=>{
-        setDataHeroes(data)
+    // addModal setea el modal en "true" y lo colocamos en "null" en 1000 ms
+
+    const addModal = (message,color) => {
+        setModal({message,color})
+        setTimeout(()=>{
+            setModal(null)
+        },1000)
     }
-    const handlerDelete  = (id)=> {
+    // Borra un miembro del team
+    const deleteMiembro  = (id)=> {
         let updateTeam = team.filter(elemento => {
             if (elemento.id == id){
-                (elemento.biography.alignment == "good")? setCharacter({...character,good: character.good - 1 }) : setCharacter({...character,bad: character.bad - 1});
-                const position = uniqueId.indexOf(id)
-                let copiaUniqueId = [...uniqueId]
-                copiaUniqueId.splice(position,1)
-                setUniqueID(copiaUniqueId)
+                const position = character.uniqueId.indexOf(id) // buscamos su posicion en el array
+                let newUniqueId = [...character.uniqueId] // hacemos una copia de uniqueID
+                newUniqueId.splice(position,1); // lo mutamos borrando el id que le proporcionamos
+                (elemento.biography.alignment == "good")? 
+                setCharacter({...character,good: character.good - 1,uniqueId: newUniqueId}) : 
+                setCharacter({...character,bad: character.bad - 1,uniqueId: newUniqueId});
+                return false
+            } else {
+                return true
             }
-            
-            return (elemento.id != id)
         })
         setTeam(updateTeam)
     }
-    const logout = () => {
-        localStorage.removeItem("auth")
-        authenticaded.setIsAuthenticaded(null)
-        history.push("/")
-    }
-    document.body.style.background = "linear-gradient(45deg,#000,#111)"
-    return (
-        
-        <section className="home">
-            <h1 className="header text-center bg-light text-dark">SUPERHERO
-                <button onClick={logout} className="logout btn btn-primary" >Logout</button>
-            </h1>
-                {(team.length > 0 )? 
+    document.body.style.background = "#000"
 
-                <div className="contenedor-team_stats mt-5 mb-5">
-                    <div className="grid-team ">
-                        {team.map(el => <CardTeam handlerDelete={handlerDelete} elemento={el} />)}
-                    </div>
-                    <div className="grid-powerstats">
-                        <h2 className="text-center">POWERSTATS</h2>
-                        {<PowerStats  team={team}/>}
-                    </div>
-                </div> 
-                :
-                <div style={{fontSize: "1.1em",height: "70vh",width: "100%",display: "flex", justifyContent: "center",alignItems: "center"}}>
-                    Utiliza el buscador para encontrar a tus personajes e incluirlos en tu lista...
-                </div>
+    return (
+        <section className="home">
+            <Header />
+            <Team team={team} deleteMiembro={deleteMiembro} />
+            <Buscador />
+            <div className="d-flex justify-content-center align-items-center" style={{minHeight: "70vh"}}>
+                {(dataHeroes)? <ResultadoPeticion addMiembro={addMiembro}/> : 
+                <FasesPeticion />
                 }
-                
-            <div className="buscador row justify-content-center p-3" style={{marginLeft: "0px",marginRight: "0px"}}>
-                <h2 className="text-center">BUSCA A TU INTEGRANTE</h2>
-                <Buscador handlerFetch={handlerFetch}/>
             </div>
-            <div className="grid-resultados mt-4">
-                {(dataHeroes) && dataHeroes.map(elemento => <Card key={elemento.id} onclick={handlerClick} elemento={elemento} />)}
-            </div>
+            {(modal) &&  <Modal modal={modal}/>}
+            
+           
         </section>
         
     )
 }
 
 
+export const Modal = ({modal}) => {
+    return (
+        <div className={"modals d-flex justify-content-center align-items-center text-light bg-"+modal.color}>
+            <div className="text-center">{modal.message}</div>
+        </div>
+    )
+}

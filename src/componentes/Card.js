@@ -1,6 +1,8 @@
-import react from "react"
+import react, { Fragment } from "react"
 
 export const Card = ({elemento,onclick}) => {
+    const arrayPowerStats = Object.entries(elemento.powerstats)
+    
     return (
         <div className="grid-card">
             <div className="contenedor-imagen">
@@ -10,16 +12,17 @@ export const Card = ({elemento,onclick}) => {
                 <h5>{elemento.name}</h5>
                 <div className="powerstats">
                     <span>
-                        Combat: {elemento.powerstats.combat}<br/>
-                        Durability: {elemento.powerstats.durability}<br/>
-                        Intelligence: {elemento.powerstats.intelligence}<br/>
-                        Power: {elemento.powerstats.power}<br/>
-                        Speed: {elemento.powerstats.speed}<br/>
-                        Strength: {elemento.powerstats.strength}<br/>
-                        Team: {(elemento.biography.alignment == "good")?  <b className="text-success">{elemento.biography.alignment}</b> : <b className="text-danger">{elemento.biography.alignment}</b>  }
+                        {arrayPowerStats.map(elemento => {
+                            return (
+                                <Fragment>
+                                    {elemento[0]}: <span className="text-warning">{elemento[1]}</span><br/>
+                                </Fragment> 
+                            )
+                        })}
+                        Team: {(elemento.biography.alignment == "good")?  <span className="text-success">{elemento.biography.alignment}</span> : <span className="text-danger">{elemento.biography.alignment}</span>  }
                     </span>
                 </div>
-                <button onClick={()=> onclick(elemento.id)} className=" btn btn-light w-100 mt-1">Agregar</button>
+                <button onClick={()=> onclick(elemento)} className=" btn btn-primary w-100 mt-1">Agregar</button>
             </div>
             
         </div>

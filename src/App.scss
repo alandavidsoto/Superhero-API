@@ -3,52 +3,81 @@
   padding: 0;
   box-sizing: border-box;
 }
+// FONT FACES
 @font-face {
   font-family: 'poppins-medium';
-  src: url(Poppins-Medium.ttf);
+  src: url(./fonts/Poppins/Poppins-Medium.ttf);
 }
+
+@font-face {
+  font-family: 'poppins-light';
+  src: url(./fonts/Poppins/Poppins-Light.ttf);
+}
+
+// MIXINS
 @mixin gridFr($column, $row : 0) {
   display: grid;
   grid-template-columns: repeat($column,1fr);
   grid-template-rows: repeat($row,1fr);
 }
+@mixin flexCenter {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// ESTILOS GLOBALES 
+.background_body {
+  background: #222 url(./images/29567.jpg);
+  height: 100vh;
+  background-blend-mode: multiply;
+  background-size: 80%;
+}
+// ROOT
 #root {
   font-family: 'poppins-medium',sans-serif, Helvetica, Arial;
   font-size: 18px;
-
   $blanco: #fff;
-  @mixin flexCenter {
-    display:flex;
-    justify-content: center;
-    align-items: center;
+  // HEADER GENERAL
+  .header {
+    position: relative;
+    .logout {
+      position: absolute;
+      right: 5px;
+      top: 10%;
+      padding: 0px;
+      height: 80%;
+      width: 70px;
+    }
   }
-  
+  //COMPONENT LOGIN
   .login {
       background: #555  url(images/29568.jpg);
       background-blend-mode:multiply;
       background-size:80%;
       height: 100vh;
       @include flexCenter();
+      flex-direction: column;
       .card {
           background-color: $blanco;
           width: 40%;
           max-width: 700px;
       }
   }
+  //COMPONENT HOME
   .home {
+    .meter {
+      border: 1px solid $blanco;
+      height: 60px;
+      width: 50%;
+      margin-bottom: 10px;
+      border-radius: 3px;
+      padding: 10px;
+      @include flexCenter();
+    }
     padding: 5px;
     color: $blanco;
-    .header {
-      position: relative;
-      .logout {
-        position: absolute;
-        right: 5px;
-        top: 10%;
-        padding: 0px;
-        height: 80%;
-        width: 70px;
-      }
-    }
+    
     .contenedor-team_stats {
       @include gridFr(2);
       .grid-team {
@@ -85,15 +114,6 @@
         .contenedor-powerstats {
           @include flexCenter();
           flex-direction: column;
-          .meter {
-            border: 1px solid $blanco;
-            height: 60px;
-            width: 50%;
-            margin-bottom: 10px;
-            border-radius: 3px;
-            padding: 10px;
-            @include flexCenter();
-          }
         }
       }
       
@@ -102,6 +122,9 @@
       position: relative;
       .formulario {
         display: flex;
+        background: $blanco;
+        border-radius: 5px;
+        padding: 0;
       }
       .error {
         position: absolute;
@@ -120,6 +143,7 @@
         border: 1px solid $blanco;
         border-radius: 5px;
         padding: 5px;
+        font-family: 'poppins-light', Arial, Helvetica, sans-serif;
         .contenedor-imagen{
           margin: auto auto;
           img {
@@ -140,21 +164,32 @@
         }
       }
     }
+    .modals{
+      text-transform: uppercase;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 50px;
+      background: $blanco;
+      color: #333;
+      z-index: 200;
+      animation: down 200ms linear 1 forwards;
+    }
+    
   }
+  //COMPONENT DETAILS
   .contenedor-details{
-    background: #222 url(./images/29567.jpg);
-    height: 100vh;
-    background-size: 70%;
-    background-blend-mode: multiply;
     .details {
+      position: relative;
       padding: 5px;
       width: 700px;
       margin: 0px auto;
-      background-color: #111;
+      background-color: rgba(0, 0, 0, 0.48);
       color: $blanco;
       display: grid;
       grid-template-columns: 200px 485px;
       column-gap: 10px;
+      font-family: 'poppins-light', Arial, Helvetica, sans-serif;
       .contenedor-imagen {
         img {
           width: 100%;
@@ -164,16 +199,30 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        h2,p {
+        h2 {
           color: rgba(253, 249, 43, 0.863);
         }
+        h4 {
+          font-size: 1.2em;
+        }
+        p {
+          font-size: 0.85em;
+          color: rgb(180, 180, 180);
+        }
+      }
+
+      .volver {
+        position: absolute;
+        right: 5px;
+        top: 5px;
       }
     }
+
   }
   
 }
 
-
+// MEDIA QUERYS
 
 @media (max-width: 500px){
   #root {
@@ -201,9 +250,16 @@
       }
 
     }
+    .contenedor-details{
+      .details {
+        grid-template-columns: 1fr;
+        width: 90%;
+      }
+    }
     
   }
 }
+
 @media (min-width: 1600px) and (max-width: 2000px){
   #root {
     font-size: 21px;
@@ -212,4 +268,12 @@
 
 
 
-
+// KEYFRAMES
+@keyframes down {
+    0%{
+      transform: translateY(-100%);
+    }
+    100%{
+      transform: translateY(0%);
+    }
+}

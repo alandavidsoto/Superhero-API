@@ -1,7 +1,11 @@
 import React, { Fragment } from 'react'
+import { useDispatch } from 'react-redux'
+import { axios_hero_action } from '../../redux/action'
 import { Formik,Form,Field, ErrorMessage } from 'formik'
-import http from '../../helper/http'
-export const Buscador = ({handlerFetch}) => {
+
+
+export const Buscador = () => {
+    const dispatch = useDispatch()
     return (
         <Fragment>
             <Formik 
@@ -18,20 +22,19 @@ export const Buscador = ({handlerFetch}) => {
                 onSubmit={
                     (values)=> {
                         let url = `https://www.superheroapi.com/api.php/3009719749316257/search/${values.search}`;
-                        http(url,'get')
-                        .then(res=> (res.status == 200) && handlerFetch(res.data.results))
-                        .catch(err => console.log(err))
+                        dispatch(axios_hero_action(url))
                     }
                 }
             >
                 {({errors})=>(
-                    <Fragment>
+                    <div className="buscador row justify-content-center p-3" style={{marginLeft: "0px",marginRight: "0px"}}>
+                        <h2 className="text-center">BUSCA A TU INTEGRANTE</h2>
                         <Form className="formulario col-lg-5">
                             <Field  name="search" className="form-control" type="text" placeholder="Ingrese un superheroe..."/>
-                            <button className="btn btn-danger" type="submit">Buscar</button>
+                            <button className="btn btn-warning" type="submit">Buscar</button>
                         </Form>
                         <ErrorMessage name="search" component={()=> (<div className="error text-danger">{errors.search}</div>)}/>
-                    </Fragment>
+                    </div>
                     
                     
                 )}

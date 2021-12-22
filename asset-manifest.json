@@ -1,26 +1,28 @@
 {
   "files": {
-    "main.css": "/Superhero-API/static/css/main.95099b11.chunk.css",
-    "main.js": "/Superhero-API/static/js/main.99678a59.chunk.js",
-    "main.js.map": "/Superhero-API/static/js/main.99678a59.chunk.js.map",
-    "runtime-main.js": "/Superhero-API/static/js/runtime-main.0ff0a6ce.js",
-    "runtime-main.js.map": "/Superhero-API/static/js/runtime-main.0ff0a6ce.js.map",
+    "main.css": "/Superhero-API/static/css/main.cd83bcbc.chunk.css",
+    "main.js": "/Superhero-API/static/js/main.d7f0fd44.chunk.js",
+    "main.js.map": "/Superhero-API/static/js/main.d7f0fd44.chunk.js.map",
+    "runtime-main.js": "/Superhero-API/static/js/runtime-main.2e1b259a.js",
+    "runtime-main.js.map": "/Superhero-API/static/js/runtime-main.2e1b259a.js.map",
     "static/css/2.818011ed.chunk.css": "/Superhero-API/static/css/2.818011ed.chunk.css",
-    "static/js/2.8ff42e07.chunk.js": "/Superhero-API/static/js/2.8ff42e07.chunk.js",
-    "static/js/2.8ff42e07.chunk.js.map": "/Superhero-API/static/js/2.8ff42e07.chunk.js.map",
-    "static/js/3.63db4a73.chunk.js": "/Superhero-API/static/js/3.63db4a73.chunk.js",
-    "static/js/3.63db4a73.chunk.js.map": "/Superhero-API/static/js/3.63db4a73.chunk.js.map",
+    "static/js/2.510776a7.chunk.js": "/Superhero-API/static/js/2.510776a7.chunk.js",
+    "static/js/2.510776a7.chunk.js.map": "/Superhero-API/static/js/2.510776a7.chunk.js.map",
+    "static/js/3.291fa13c.chunk.js": "/Superhero-API/static/js/3.291fa13c.chunk.js",
+    "static/js/3.291fa13c.chunk.js.map": "/Superhero-API/static/js/3.291fa13c.chunk.js.map",
     "index.html": "/Superhero-API/index.html",
     "static/css/2.818011ed.chunk.css.map": "/Superhero-API/static/css/2.818011ed.chunk.css.map",
-    "static/css/main.95099b11.chunk.css.map": "/Superhero-API/static/css/main.95099b11.chunk.css.map",
-    "static/js/2.8ff42e07.chunk.js.LICENSE.txt": "/Superhero-API/static/js/2.8ff42e07.chunk.js.LICENSE.txt",
-    "static/media/App.scss": "/Superhero-API/static/media/Poppins-Medium.9e1bb626.ttf"
+    "static/css/main.cd83bcbc.chunk.css.map": "/Superhero-API/static/css/main.cd83bcbc.chunk.css.map",
+    "static/js/2.510776a7.chunk.js.LICENSE.txt": "/Superhero-API/static/js/2.510776a7.chunk.js.LICENSE.txt",
+    "static/media/App.scss": "/Superhero-API/static/media/Poppins-Medium.9e1bb626.ttf",
+    "static/media/superman2.7b14ab17.jpg": "/Superhero-API/static/media/superman2.7b14ab17.jpg",
+    "static/media/warning.7e688bdd.svg": "/Superhero-API/static/media/warning.7e688bdd.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.0ff0a6ce.js",
+    "static/js/runtime-main.2e1b259a.js",
     "static/css/2.818011ed.chunk.css",
-    "static/js/2.8ff42e07.chunk.js",
-    "static/css/main.95099b11.chunk.css",
-    "static/js/main.99678a59.chunk.js"
+    "static/js/2.510776a7.chunk.js",
+    "static/css/main.cd83bcbc.chunk.css",
+    "static/js/main.d7f0fd44.chunk.js"
   ]
 }
